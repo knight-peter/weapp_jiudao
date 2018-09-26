@@ -1354,57 +1354,57 @@ class wxAPI {
     })
   }
   /* wx.faceVerifyForPay(Object object) 支付各个安全场景验证人脸 ---------------------------------- */
-  faceVerifyForPay({
-    scene,
-    package,
-    packageSign,
-    otherVerifyTitle,
-    complete = null
-  }) {
-    return this._return(this._faceVerifyForPay(scene, package, packageSign, otherVerifyTitle, complete))
-  }
-  _faceVerifyForPay(scene, package, packageSign, otherVerifyTitle, complete) {
-    const wx_faceVerifyForPay = promisify(wx.faceVerifyForPay)
-    return wx_faceVerifyForPay({
-      scene,
-      package,
-      packageSign,
-      otherVerifyTitle,
-      complete
-    })
-  }
+  // faceVerifyForPay({
+  //   scene,
+  //   package,
+  //   packageSign,
+  //   otherVerifyTitle,
+  //   complete = null
+  // }) {
+  //   return this._return(this._faceVerifyForPay(scene, package, packageSign, otherVerifyTitle, complete))
+  // }
+  // _faceVerifyForPay(scene, package, packageSign, otherVerifyTitle, complete) {
+  //   const wx_faceVerifyForPay = promisify(wx.faceVerifyForPay)
+  //   return wx_faceVerifyForPay({
+  //     scene,
+  //     package,
+  //     packageSign,
+  //     otherVerifyTitle,
+  //     complete
+  //   })
+  // }
   /* wx.requestPayment(Object object) 发起微信支付。了解更多信息，请查看微信支付接口文档 ------------------------------- */
-  requestPayment({
-    timeStamp,
-    nonceStr,
-    package,
-    signType,
-    paySign,
-    complete = null
-  }) {
-    return this._return(this._requestPayment(timeStamp,
-      nonceStr,
-      package,
-      signType,
-      paySign,
-      complete))
-  }
-  _requestPayment(timeStamp,
-    nonceStr,
-    package,
-    signType,
-    paySign,
-    complete) {
-    const wx_requestPayment = promisify(wx.requestPayment)
-    return wx_requestPayment({
-      timeStamp,
-      nonceStr,
-      package,
-      signType,
-      paySign,
-      complete
-    })
-  }
+  // requestPayment({
+  //   timeStamp,
+  //   nonceStr,
+  //   package,
+  //   signType,
+  //   paySign,
+  //   complete = null
+  // }) {
+  //   return this._return(this._requestPayment(timeStamp,
+  //     nonceStr,
+  //     package,
+  //     signType,
+  //     paySign,
+  //     complete))
+  // }
+  // _requestPayment(timeStamp,
+  //   nonceStr,
+  //   package,
+  //   signType,
+  //   paySign,
+  //   complete) {
+  //   const wx_requestPayment = promisify(wx.requestPayment)
+  //   return wx_requestPayment({
+  //     timeStamp,
+  //     nonceStr,
+  //     package,
+  //     signType,
+  //     paySign,
+  //     complete
+  //   })
+  // }
   /* wx.getUserInfo(Object object) 获取用户信息。 --------------------------------------------------- */
   /* 调用前需要 用户授权 scope.userInfo。 */
   getUserInfo({
