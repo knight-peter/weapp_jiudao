@@ -1,12 +1,15 @@
 {
-  "pages":[
-    "pages/index/index",
+  "pages": [
+    "pages/classic/classic",
     "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ddd",
+    "navigationBarTitleText": "旧岛风情",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "default",
+    "backgroundColor": "#D80000",
+    "enablePullDownRefresh": true
   }
 }
