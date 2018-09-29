@@ -1,3 +1,4 @@
+import Promise from './es6-promise.min'
 import Config from '../config';
 import promisify from './promisify';
 const baseUrl = Config.baseUrl;
@@ -14,28 +15,30 @@ class wxAPI {
     this[Config.request.tokenName] = Config[Config.request.tokenName];
     this.tokenName = Config.request.tokenName;
     this.tokenValue = Config[Config.request.tokenName];
-  }
 
+  }
   /* 网络 */
   /* wx.request() 发起 HTTPS 网络请求 ----------------------------------------------------------------*/
   request({
     url,
     method = 'GET',
     data = {},
-    complete
+    header = {
+      'content-type': 'application/json',
+      [this.tokenName]: this.tokenValue,
+    },
+    complete = null
   }) {
-    return this._return(this._request(url, method, data, complete));
+
+    return this._return(this._request(url, method, data, header, complete));
   }
-  _request(url, method, data, complete) {
-    const wx_request = promisify(wx.request);
+  _request(url, method, data, header, complete) {
+    const wx_request = promisify(wx.request)
     return wx_request({
-      url: `${this.baseUrl}${url}`,
+      url: this._url(url),
       method,
       data,
-      header: {
-        'content-type': 'application/json',
-        [this.tokenName]: this.tokenValue,
-      },
+      header,
       complete,
     });
   }
@@ -1000,14 +1003,14 @@ class wxAPI {
       image,
       duration,
       mask,
-      complete,
+      complete
     });
   }
   /* wx.showLoading(Object object) 显示 loading 提示框, 需主动调用 wx.hideLoading 才能关闭提示框 */
   showLoading({
     title,
-    mask,
-    complete
+    mask = false,
+    complete = null
   }) {
     return this._return(this._showLoading(title, mask, complete));
   }
@@ -1441,10 +1444,11 @@ class wxAPI {
 
   /* 登录 */
   /* wx.login(OBJECT) 调用接口wx.login() 获取临时登录凭证（code）--------------------------------------- */
-  login({
-    timeout = 30000,
-    complete = null
-  }) {
+  login(obj) {
+    let {
+      timeout = 30000,
+        complete = null
+    } = obj ? obj : {}
     return this._return(this._login(timeout, complete))
   }
   _login(timeout, complete) {
@@ -1541,10 +1545,17 @@ class wxAPI {
       error_code = 1;
     }
     const tip = tips[error_code];
-    const title = tip ? tip : tips[1];
-    const icon = 'none';
-    const duration = 1000;
-    return _showToast(title, icon, duration, complete);
+    let {
+      title,
+      icon = 'none',
+      image = null,
+      duration = 2000,
+      mask = false,
+      complete = null,
+    } = {
+      title: tip ? tip : tips[1]
+    }
+    return this._showToast(title, icon, image, duration, mask, complete);
   }
   /* 对success返回值进行内部处理 */
   _resReturn(res) {
@@ -1572,6 +1583,14 @@ class wxAPI {
       .catch(err => {
         that._show_error(1);
       });
+  }
+  /* 判断返回正确的url */
+  _url(url) {
+    if (url.startsWith('http')) {
+      return url
+    } else {
+      return `${this.baseUrl}${url}`
+    }
   }
 }
 

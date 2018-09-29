@@ -1,3 +1,7 @@
+import wxAPI from '../../utils/wxAPI';
+import Base from '../../utils/base'
+const WX = new wxAPI();
+const bs = new Base();
 // pages/classic/classic.js
 Page({
 
@@ -12,7 +16,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    /* WX.request({
+        url: '/classic/latest',
+      })
+      .then(res => {
+        console.log(res)
+      }) */
+    bs.req({
+        url: '/classic/latest',
+        loading: false
+      })
+      .then(res => {
+        console.log(res)
+      })
+    // bs.loginIn()
+    // WX.login().then(res => console.log(res))
   },
 
   /**

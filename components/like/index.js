@@ -8,7 +8,8 @@ Component({
       type: Boolean,
     },
     count: {
-      type: Number
+      type: Number,
+      // value: 999
     }
   },
 
@@ -25,30 +26,35 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onLike: function (event) {
-      console.log(event)
-      let like = !this.data.like;
-      let changeNum = 1;
-      if (!like) {
-        changeNum = -1
-      }
-      let count = this.data.count + changeNum
+    onLike(event) {
+      let like = this.properties.like
+      let count = this.properties.count
+      count = like ? count - 1 : count + 1
+      let countStr = this._numChange(count)
+
+      this.setData({
+        like: !like,
+        count: count,
+        countStr: countStr
+      })
+    },
+    /* 当喜欢数到1000时，显示文字为1k */
+    _numChange(count) {
       let countStr = count.toString();
       let countLen = countStr.length;
       if (count >= 1000) {
         countStr = countStr.substr(0, countLen - 3) + 'k'
       }
-
-      this.setData({
-        like: like,
-        count: count,
-        countStr: countStr
-      })
+      return countStr;
     }
   },
   ready: function () {
+    let that = this;
+    let countStr = this._numChange(that.properties.count)
     this.setData({
-      countStr: this.properties.count
+      like: that.properties.liek,
+      count: that.properties.count,
+      countStr: countStr
     })
   }
 })
