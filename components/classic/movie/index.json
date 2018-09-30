@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "v-movie": "/components/classic/movie/index"
+  }
+}
