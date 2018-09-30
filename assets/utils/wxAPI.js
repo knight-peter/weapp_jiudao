@@ -1,8 +1,10 @@
-import Promise from './es6-promise.min'
-import Config from '../config';
-import promisify from './promisify';
+import Promise from '../extend/es6-promise.min.js'
+import Config from '../config.js';
+import promisify from './promisify.js';
 const baseUrl = Config.baseUrl;
 const appkey = Config.appkey;
+const msgName = Config.response.msgName;
+const statusName = Config.response.statusName;
 const tips = {
   1: '抱歉，出现了一个错误',
   1005: 'appkey无效，请前往www.7yue.pro申请',
@@ -12,9 +14,10 @@ const tips = {
 class wxAPI {
   constructor() {
     this.baseUrl = Config.baseUrl;
-    this[Config.request.tokenName] = Config[Config.request.tokenName];
     this.tokenName = Config.request.tokenName;
     this.tokenValue = Config[Config.request.tokenName];
+    this.msgName = Config.response.msgName;
+    this.statusName = Config.response.statusName;
 
   }
   /* 网络 */
@@ -1540,7 +1543,7 @@ class wxAPI {
   }
   /* 补充方法 -------------------------------------------------------------------------------*/
   /* 错误提示 */
-  _show_error(error_code) {
+  _show_error(error_code, error_msg) {
     if (!error_code) {
       error_code = 1;
     }
@@ -1563,8 +1566,9 @@ class wxAPI {
     if (code.startsWith('2')) {
       return res.data;
     } else {
-      const error_code = res.data.error_code;
-      this._show_error(error_code);
+      const error_code = res.data[this.statusName] || '';
+      const error_msg = res.data[this.msgName] || '';
+      this._show_error(error_code, error_msg);
     }
   }
   /* 返回值进行内部处理 */

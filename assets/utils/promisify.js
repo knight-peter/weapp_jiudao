@@ -1,4 +1,4 @@
-import Promise from './es6-promise.min'
+import Promise from '../extend/es6-promise.min.js'
 /* 将微信小程序异步API封装为Promise */
 
 const promisify = (api) => {

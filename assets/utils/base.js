@@ -1,7 +1,9 @@
-import wxAPI from './wxAPI'
-import Config from '../config';
+import wxAPI from './wxAPI.js'
+import Config from '../config.js';
 const baseUrl = Config.baseUrl;
 const appkey = Config.appkey;
+const msgName = Config.response.msgName;
+const statusName = Config.response.statusName;
 
 class Base extends wxAPI {
   constructor() {
@@ -9,6 +11,8 @@ class Base extends wxAPI {
     this.baseUrl = Config.baseUrl;
     this.tokenName = Config.request.tokenName;
     this.tokenValue = Config[Config.request.tokenName];
+    this.msgName = Config.response.msgName;
+    this.statusName = Config.response.statusName;
   }
   /* 获取数据添加loading弹窗 */
   req({
@@ -18,6 +22,8 @@ class Base extends wxAPI {
     complete = null,
     loading = true
   }) {
+    const startDate = new Date()
+    const startTime = startDate.getTime()
     if (loading) {
       wx.showLoading({
         title: '加载中'
@@ -36,9 +42,15 @@ class Base extends wxAPI {
         complete
       })
       .then(res => {
-        if (loading) {
+        const endDate = new Date()
+        const endTime = endDate.getTime()
+        if (endTime - startTime > 500 && loading === true) {
           wx.hideLoading();
         }
+        setTimeout(function () {
+          wx.hideLoading();
+        }, 500)
+
         return res
       })
   }

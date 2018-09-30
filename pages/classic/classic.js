@@ -1,7 +1,9 @@
-import wxAPI from '../../utils/wxAPI';
-import Base from '../../utils/base'
+import wxAPI from '../../assets/utils/wxAPI';
+import Base from '../../assets/utils/base'
+import ClassicModel from '../../models/classic_model'
 const WX = new wxAPI();
 const bs = new Base();
+const classic = new ClassicModel();
 // pages/classic/classic.js
 Page({
 
@@ -22,15 +24,16 @@ Page({
       .then(res => {
         console.log(res)
       }) */
-    bs.req({
+    /* bs.req({
         url: '/classic/latest',
-        loading: false
+        // loading: false
       })
       .then(res => {
         console.log(res)
-      })
+      }) */
     // bs.loginIn()
     // WX.login().then(res => console.log(res))
+    classic.getLatest().then(res => console.log(res))
   },
 
   /**
