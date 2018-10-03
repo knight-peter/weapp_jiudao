@@ -1,3 +1,6 @@
+import Config from './assets/config.js';
+const tokenName = Config.request.tokenName;
+const tokenValue = Config[Config.request.tokenName];
 //app.js
 App({
   onLaunch: function () {
@@ -5,6 +8,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    wx.setStorageSync(tokenName, tokenValue)
 
     // 登录
     wx.login({

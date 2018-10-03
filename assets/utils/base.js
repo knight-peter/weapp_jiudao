@@ -1,7 +1,7 @@
 import wxAPI from './wxAPI.js'
 import Config from '../config.js';
 const baseUrl = Config.baseUrl;
-const appkey = Config.appkey;
+const appkey = Config.request.tokenName;
 const msgName = Config.response.msgName;
 const statusName = Config.response.statusName;
 
@@ -37,7 +37,7 @@ class Base extends wxAPI {
         data,
         header: {
           'content-type': 'application/json',
-          [this.tokenName]: token,
+          [this.tokenName]: token || this.tokenValue,
         },
         complete
       })
