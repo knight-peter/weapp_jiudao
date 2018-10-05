@@ -1,3 +1,19 @@
 <!-- pages/classic/classic.wxml -->
-<v-like bind:like="onLike" like="{{likeStatus}}" count="{{likeCount}}" />
-<v-movie img="{{classic.image}}" content="{{classic.content}}" />
+<view class="container">
+  <view class="header">
+    <v-episode class="episode" index="{{classic.index}}" />
+    <view class="like-container">
+        <v-like class="like" bind:like="onLike" like="{{likeStatus}}" count="{{likeCount}}" />
+    </view>
+  </view>
+  <!-- 电影组件 -->
+  <v-movie img="{{classic.image}}" content="{{classic.content}}" />
+  <!-- 书籍组件 -->
+  <!-- 音乐组件 -->
+  <!-- 切换按钮栏 -->
+  <v-navi class="navi" title="{{classic.title}}" 
+  first="{{first}}"
+  latest="{{latest}}"
+  bind:left="onNext"
+  bind:right="onPrevious" />
+</view>

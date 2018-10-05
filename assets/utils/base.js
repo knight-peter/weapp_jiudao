@@ -44,13 +44,15 @@ class Base extends wxAPI {
       .then(res => {
         const endDate = new Date()
         const endTime = endDate.getTime()
-        if (endTime - startTime > 500 && loading === true) {
-          wx.hideLoading();
+        if (loading) {
+          if (endTime - startTime > 500) {
+            wx.hideLoading();
+          } else {
+            setTimeout(function () {
+              wx.hideLoading();
+            }, 500)
+          }
         }
-        setTimeout(function () {
-          wx.hideLoading();
-        }, 500)
-
         return res
       })
   }
