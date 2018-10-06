@@ -100,12 +100,20 @@ Page({
     let index = this.data.classic.index
     classicModel.getClassic(index, nextOrPrevious)
       .then(res => {
+        this._getLikeStatus(res.id, res.type)
         this.setData({
           classic: res,
-          likeCount: res.fav_nums,
-          likeStatus: res.like_status,
           latest: classicModel.isLatest(res.index),
           first: classicModel.isFirst(res.index)
+        })
+      })
+  },
+  _getLikeStatus(artID, category) {
+    likeModel.getClassicLikeStatus(artID, category)
+      .then(res => {
+        this.setData({
+          likeCount: res.fav_nums,
+          likeStatus: res.like_status
         })
       })
   }

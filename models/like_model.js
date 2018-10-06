@@ -36,5 +36,12 @@ class LikeModel extends Base {
       })
   }
 
+  /* 获取点赞信息 */
+  getClassicLikeStatus(artID, category) {
+    return this.req({
+      url: `classic/${category}/${artID}/favor`,
+      loading: false
+    })
+  }
 }
 export default LikeModel;
