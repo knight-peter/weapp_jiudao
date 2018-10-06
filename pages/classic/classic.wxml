@@ -7,9 +7,12 @@
     </view>
   </view>
   <!-- 电影组件 -->
-  <v-movie img="{{classic.image}}" content="{{classic.content}}" />
-  <!-- 书籍组件 -->
+  <v-movie hidden="{{classic.type!=100}}" img="{{classic.image}}" content="{{classic.content}}" />
   <!-- 音乐组件 -->
+  <v-music wx:if="{{classic.type==200}}" img="{{classic.image}}" content="{{classic.content}}" title="{{classic.title}}" src="{{classic.url}}" />
+  <!-- 书籍组件 -->
+  <v-essay hidden="{{classic.type!=300}}" img="{{classic.image}}" content="{{classic.content}}" />
+  
   <!-- 切换按钮栏 -->
   <v-navi class="navi" title="{{classic.title}}" 
   first="{{first}}"
