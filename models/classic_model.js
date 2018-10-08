@@ -13,7 +13,7 @@ class ClassicModel extends Base {
   /* 获取最新一期 */
   getLatest() {
     return this.req({
-        url: '/classic/latest',
+        url: 'classic/latest',
       })
       .then(res => {
         // 在storage中写入最新一期index
