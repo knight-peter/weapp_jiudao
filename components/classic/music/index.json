@@ -1,6 +1,4 @@
 {
   "component": true,
-  "usingComponents": {
-    "v-music": "/components/classic/music/index"
-  }
+  "usingComponents": {}
 }

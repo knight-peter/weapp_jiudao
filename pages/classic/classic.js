@@ -27,9 +27,7 @@ Page({
     classicModel.getLatest().then(res => {
       console.log('最新期刊：', res)
       this.setData({
-        classic: res,
-        likeCount: res.fav_nums,
-        likeStatus: res.like_status
+        classic: res
       })
     })
   },
@@ -111,9 +109,10 @@ Page({
   _getLikeStatus(artID, category) {
     likeModel.getClassicLikeStatus(artID, category)
       .then(res => {
+        // 合并两个对象
+        let newVal = Object.assign(this.data.classic, res)
         this.setData({
-          likeCount: res.fav_nums,
-          likeStatus: res.like_status
+          classic: newVal
         })
       })
   }

@@ -1,6 +1,4 @@
 {
   "component": true,
-  "usingComponents": {
-    "v-navi": "/components/navi/index"
-  }
+  "usingComponents": {}
 }

@@ -3,7 +3,7 @@
   <view class="header">
     <v-episode class="episode" index="{{classic.index}}" />
     <view class="like-container">
-      <v-like class="like" bind:like="onLike" like="{{likeStatus}}" count="{{likeCount}}" />
+      <v-like class="like" bind:like="onLike" like="{{classic.like_status}}" count="{{classic.fav_nums}}" />
     </view>
   </view>
   <!-- 电影组件 -->

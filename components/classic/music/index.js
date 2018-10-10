@@ -21,15 +21,18 @@ Component({
   },
   /* 组件生命周期函数，在组件实例进入页面节点树时执行 */
   attached() {
+    console.log({
+      '进入，InnerAudioContext.paused': InnerAudioContext.paused
+    })
     this._recoverStatus()
     this._monitorSwitch()
   },
   /* 组件生命周期函数，在组件实例被从页面节点树移除时执行 */
   detached: function () {
     // InnerAudioContext.stop()
-    /* console.log({
+    console.log({
       '离开，InnerAudioContext.paused': InnerAudioContext.paused
-    }) */
+    })
   },
 
   /**
@@ -54,9 +57,7 @@ Component({
     /* 判断音乐播放 */
     _recoverStatus() {
       // 当前没有任何音乐播放
-      /* console.log({
-        '进入，InnerAudioContext.paused': InnerAudioContext.paused
-      }) */
+
       if (InnerAudioContext.paused) {
         this.setData({
           playing: false

@@ -55,6 +55,17 @@ class ClassicModel extends Base {
     const latestIndex = this._getLatestIndex()
     return latestIndex == index ? true : false
   }
+  getMyFavor() {
+    return this.req({
+      url: 'classic/favor',
+      loading: false
+    })
+  }
+  getById(cid, type) {
+    return this.req({
+      url: `classic/${type}/${cid}`,
+    })
+  }
   /* 在storage中写入最新一期index */
   _setLatestIndex(index) {
     wx.setStorageSync('latest', index)

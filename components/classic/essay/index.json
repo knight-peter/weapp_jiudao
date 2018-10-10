@@ -1,6 +1,4 @@
 {
   "component": true,
-  "usingComponents": {
-    "v-essay": "/components/classic/essay/index"
-  }
+  "usingComponents": {}
 }

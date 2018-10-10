@@ -1,3 +1,13 @@
 /**app.wxss**/
 /* 加载全局文件 */
 @import "./assets/css/g-global.wxss";
+
+.share-btn {
+  margin-left: 10rpx;
+}
+
+.share {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle
+}

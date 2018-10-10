@@ -1049,7 +1049,11 @@ class wxAPI {
     title = '小程序标题',
     complete = null
   }) {
-    return this._return(this._setNavigationBarTitle(title, complete));
+    const obj = {
+      title: title || '小程序标题',
+      complete: complete || null
+    }
+    return this._return(this._setNavigationBarTitle(obj.title, obj.complete));
   }
   _setNavigationBarTitle(title, complete) {
     const wx_setNavigationBarTitle = promisify(wx.setNavigationBarTitle);
@@ -1289,7 +1293,7 @@ class wxAPI {
     return this._return(this._getSetting(complete))
   }
   _getSetting(complete) {
-    const wx_getSetting = promisify(complete)
+    const wx_getSetting = promisify(wx.getSetting)
     return wx_getSetting({
       complete
     })
@@ -1418,7 +1422,12 @@ class wxAPI {
     lang = 'en',
     complete = null
   }) {
-    return this._return(this._getUserInfo(withCredentials, lang, complete))
+    const obj = {
+      withCredentials: withCredentials || false,
+      lang: lang || 'en',
+      complete: complete || null
+    }
+    return this._return(this._getUserInfo(obj.withCredentials, obj.lang, obj.complete))
   }
   _getUserInfo(withCredentials, lang, complete) {
     const wx_getUserInfo = promisify(wx.getUserInfo)
