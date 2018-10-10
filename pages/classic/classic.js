@@ -8,7 +8,10 @@ const classicModel = new ClassicModel();
 const likeModel = new LikeModel();
 // pages/classic/classic.js
 Page({
-
+  properties: {
+    cid: Number,
+    type: Number
+  },
   /**
    * 页面的初始数据
    */
@@ -23,62 +26,28 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    classicModel.getLatest().then(res => {
-      console.log('最新期刊：', res)
-      this.setData({
-        classic: res
+
+
+  attached(options) {
+    const cid = this.properties.cid
+    const type = this.properties.type
+    if (!cid) {
+      classicModel.getLatest().then(res => {
+        this.setData({
+          classic: res
+        })
       })
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    } else {
+      classicModel.getById(cid, type)
+        .then(res => {
+          this._getLikeStatus(res.id, res.type)
+          this.setData({
+            classic: res,
+            latest: classicModel.isLatest(res.index),
+            first: classicModel.isFirst(res.index)
+          })
+        })
+    }
   },
   /* 收藏功能 */
   onLike(event) {
